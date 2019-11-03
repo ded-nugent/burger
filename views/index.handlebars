@@ -1,0 +1,36 @@
+
+   
+    <div style="text-align: center;">
+        <h2 class="heading headTitle" id="add">make a burger</h2>
+            <form method="POST" action="api/burgers" class="addOne text-center">
+                <textarea id="textArea" type="text" name="burger_name" rows="2" cols="40"></textarea>
+                <button id="btnCreate" type="submit">submit</button>
+            </form>
+    </div>
+    <div>
+        <div style="float: left;">
+            <h2 class="heading headTitle">undevoured burgers</h2>
+                <ul>
+                    {{#each burgers}} {{#unless this.devoured}}
+                        <li>
+                            <p class="burgerType">{{this.burger_name}}</p>
+                                <form action="api/burgers/{{this.id}}?_method=PUT" method="POST" class="dev">
+                                    <input type="hidden" name="devoured" value="true">
+                                    <button class="btnDevour" type="submit">Devour it</button>
+                                </form>
+                        </li>
+                    {{/unless}} {{/each}}
+                </ul>
+        </div>
+        <div  style="float: right;">
+            <h2 class="heading headTitle">devoured burgers</h2>
+                <ul>
+                    {{#each burgers}} {{#if this.devoured}}
+                        <li>
+                            <p class="burgerType">{{this.burger_name}}</p>
+                        </li>
+                    {{/if}} {{/each}}
+                </ul>
+        </div>
+
+    </div>
